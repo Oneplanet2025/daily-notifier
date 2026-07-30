@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 WEEKDAYS = ["月", "火", "水", "木", "金", "土", "日"]
 
@@ -19,18 +19,34 @@ def format_forecast_date(forecast_date: str):
 
     return f"{dt.year}年{dt.month}月{dt.day}日（{weekday}）"
 
+def format_pop_datetime(forecast_date: str):
+    """降水確率の日時を「xx月xx日xx時～xx時」に変換する"""
+
+    start = datetime.fromisoformat(forecast_date)
+    end = start + timedelta(hours=6)
+
+    return (
+        f"{start.month}月{start.day}日"
+        f"{start.hour:02}時～"
+        f"{end.hour:02}時"
+    )
+
 
 def format_weather(weather_info):
+    pop_text = ""
+
+    for rain in weather_info["rain_forecasts"]:
+        pop_text += (
+            f'{format_pop_datetime(rain["time"])}：'
+            f'{rain["pop"]}%\n'
+        )
     return f"""明日の天気予報
 
 明日の日付：{format_forecast_date(weather_info["forecast_date"])}
 天気：{weather_info["weather_string"]}
 
-降水確率
-18〜24時：{weather_info["rain_18_24"]}%
-00〜06時：{weather_info["rain_00_06"]}%
-06〜12時：{weather_info["rain_06_12"]}%
-12〜18時：{weather_info["rain_12_18"]}%
+降水確率：
+{pop_text}
 
 最高気温：{weather_info["temp_max"]}℃
 最低気温：{weather_info["temp_min"]}℃

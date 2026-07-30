@@ -31,6 +31,14 @@ def get_weather(weather_json_data):
             break
     if forecast_pop_area is None:
         raise ValueError(f"{JMA_FORECAST_AREA_NAME} の降水確率が見つかりません。")
+    forecast_pop_times = weather_json_data[0]["timeSeries"][1]["timeDefines"]
+    forecast_pops = forecast_pop_area["pops"]
+    rain_forecasts = []
+    for forecast_time, pop in zip(forecast_pop_times, forecast_pops):
+        rain_forecasts.append({
+            "time": forecast_time,
+            "pop": pop,
+    })
 
 
     # 名古屋の気温を取得
@@ -46,10 +54,7 @@ def get_weather(weather_json_data):
         "report_datetime": weather_json_data[0]["reportDatetime"],
         "forecast_date": weather_json_data[0]["timeSeries"][0]["timeDefines"][1],
         "weather_string":  forecast_area["weathers"][1],
-        "rain_18_24":forecast_pop_area["pops"][1],
-        "rain_00_06":forecast_pop_area["pops"][2],
-        "rain_06_12":forecast_pop_area["pops"][3],
-        "rain_12_18":forecast_pop_area["pops"][4],
+        "rain_forecasts": rain_forecasts,
         "temp_min": temperature_area["temps"][2],
         "temp_max": temperature_area["temps"][3],
     }
