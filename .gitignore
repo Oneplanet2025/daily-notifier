@@ -127,3 +127,6 @@ htmlcov/
 
 # General cache
 .cache/
+
+
+!.env.example

@@ -1,14 +1,15 @@
 # 動作確認用
-name: cron Test
+name: daily-notifier
 
 
 on:
   workflow_dispatch:
 
-  # push :
-
   # schedule:
   #   - cron: '0,30 * * * *'
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -26,5 +27,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Python
+      - name: daily-notifier mail send
+        env:
+          MAIL_ADDRESS: ${{ secrets.MAIL_ADDRESS }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
         run: python main.py

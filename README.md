@@ -44,18 +44,19 @@ GitHub Actionsを利用して、翌日の生活情報を毎晩自動通知する
 * 気象庁JSONの取得
 * JSONから必要な情報の抽出
 * Pythonモジュール分割（config.py・weather.py・main.py）
+* 取得情報を人間に読みやす形式に変換
+*  メール送信
+*  GitHub Secretsによる機密情報管理
 
 ### 未実装
 
 以下は今後実装予定です。
 
-* 取得情報を人間に読みやす形式に変換
-* メール通知
-* LINE通知
-* 洗濯指数
-* 気圧情報
+* 24節季と72候の取得
+* 気圧変化
 * ごみ収集情報
-* その他生活情報の通知機能
+* 定期実行の発火遅延の解消
+* Aiで読みやすい形式に整える。
 
 ---
 
@@ -79,15 +80,19 @@ GitHub Actionsを利用して、翌日の生活情報を毎晩自動通知する
 
 ```text
 daily-notifier/
-├── .github/
-│   └── workflows/test.yml
+├── .github/workflows/
+│   └── test.yml
 ├── src/
 │   ├── __init__.py
 │   ├── config.py
+│   ├── format.py
+│   ├── mailer.py
 │   └── weather.py
 ├── main.py
 ├── .venv/（Git管理外）
 ├── .vscode/（Git管理外）
+├── .env（Git管理外）
+├── .env.example
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -136,3 +141,9 @@ pip install -r requirements.txt
 - APIキー不要
 - 日本語の天気予報をそのまま利用できる
 - 降水確率・最高気温・最低気温等必要な情報を取得できる
+
+### GitHub Secrets
+
+本プロジェクトでは、メールアドレスやパスワードなどの機密情報はGitHub Secretsで管理しています。
+
+ローカル開発では `.env` を利用し、GitHub Actionsでは Secrets を環境変数として渡しています。
