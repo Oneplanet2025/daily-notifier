@@ -23,7 +23,8 @@ MAIL_PASSWORD = os.environ["MAIL_PASSWORD"]
 MAIL_TO = os.environ["MAIL_TO"]
 
 #ローカル検証用のコード
-# load_dotenv()
+# ENV_PATH = Path(r"C:\Secrets\daily-notifier.env")
+# load_dotenv(ENV_PATH)
 
 # #送信元メールアドレス
 # MAIL_ADDRESS = os.getenv("MAIL_ADDRESS")
