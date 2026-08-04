@@ -27,6 +27,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 - 最低気温
 - 予報取得時刻
 
+<img width="677" height="548" alt="スクリーンショット 2026-08-04 122858" src="https://github.com/user-attachments/assets/df5ff01f-01da-4437-91e7-f8b0f6755668" />
 
 ---
 
