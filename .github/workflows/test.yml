@@ -1,12 +1,12 @@
-# 動作確認用
+
 name: daily-notifier
 
 
 on:
   workflow_dispatch:
 
-  # schedule:
-  #   - cron: '0,30 * * * *'
+  schedule:
+    - cron: '0 16 * * *'
 
 permissions:
   contents: read

@@ -10,7 +10,7 @@ def main():
     format.format_weather(weather_info)
 
     send_mail(
-    "daily-notifier テスト",
+    "daily-notifier",
     format.format_weather(weather_info)
     )
 
