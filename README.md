@@ -89,6 +89,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 ## ディレクトリ構成
 
 現在は開発初期のため、ディレクトリ構成は変更される可能性があります。
+.env はプロジェクト外で管理しています。
 
 ```text
 daily-notifier/
@@ -103,7 +104,6 @@ daily-notifier/
 ├── main.py
 ├── .venv/（Git管理外）
 ├── .vscode/（Git管理外）
-├── .env（Git管理外）
 ├── .env.example
 ├── requirements.txt
 ├── README.md
@@ -178,17 +178,10 @@ https://www.jma.go.jp/bosai/common/const/area.json
 必要なSecretsは、以下の通りです。
 
 - MAIL_ADDRESS：送信元のGmailアドレス
-- MAIL_PASSWORD：送信元GmailアドレスのAPIパスワード
+- MAIL_PASSWORD：送信元GmailアドレスのAppパスワード
 - MAIL_TO：送信先のメールアドレス
 
-ローカル開発では `.env` を利用し、GitHub Actionsでは Secrets を環境変数として渡しています。
+ローカル開発では プロジェクト外に配置した`.env` を利用し、GitHub Actionsでは Secrets を環境変数として渡しています。
 
-ローカル実行時は
+ローカル実行時は、`.env.example` を参考に、プロジェクト外の任意の場所（例：`C:\Secrets\daily-notifier.env`）へ `.env` ファイルを作成してください。その後、config.pyの「ENV_PATH 」に.envファイルのパスを記載してください。
 
-.env.example
-
-をコピーして
-
-.env
-
-を作成してください。
