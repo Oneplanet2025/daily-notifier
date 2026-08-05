@@ -55,8 +55,8 @@ def get_weather(weather_json_data):
         "forecast_date": weather_json_data[0]["timeSeries"][0]["timeDefines"][1],
         "weather_string":  forecast_area["weathers"][1],
         "rain_forecasts": rain_forecasts,
-        "temp_min": temperature_area["temps"][2],
-        "temp_max": temperature_area["temps"][3],
+        "temp_min": temperature_area["temps"][-2],
+        "temp_max": temperature_area["temps"][-1],
     }
 
     return weather_info
