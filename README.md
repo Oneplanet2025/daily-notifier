@@ -94,7 +94,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 ```text
 daily-notifier/
 ├── .github/workflows/
-│   └── test.yml
+│   └── daily-notifier.yml
 ├── src/
 │   ├── __init__.py
 │   ├── config.py
