@@ -32,7 +32,7 @@ def format_pop_datetime(forecast_date: str):
     )
 
 
-def format_weather(weather_info):
+def format_weather_section(weather_info):
     pop_text = ""
 
     for rain in weather_info["rain_forecasts"]:
