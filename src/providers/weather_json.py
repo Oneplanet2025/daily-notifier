@@ -11,7 +11,7 @@ def fetch_forecast_json():
 
     return weather_json_data
 
-def get_weather(weather_json_data):
+def extract_weather_info(weather_json_data):
     """気象予報JSONから必要な情報だけ辞書として返す"""
 
     # 東部の天気予報を取得
