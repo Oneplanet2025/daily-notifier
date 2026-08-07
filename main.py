@@ -2,7 +2,7 @@ from src.providers import weather_json
 from src.formatters import weather_formatter, message
 from src.mailer import send_mail
 
-def main():
+def main() -> None:
     forecast_json = weather_json.fetch_forecast_json()
 
     weather_info = weather_json.extract_weather_info(forecast_json)

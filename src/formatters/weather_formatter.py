@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 WEEKDAYS = ["月", "火", "水", "木", "金", "土", "日"]
 
-def format_report_datetime(report_datetime: str):
+def format_report_datetime(report_datetime: str) -> str:
     """取得日時を「xxxx年xx月xx日xx時」に変換する"""
 
     dt = datetime.fromisoformat(report_datetime)
@@ -10,7 +10,7 @@ def format_report_datetime(report_datetime: str):
     return f"{dt.year}年{dt.month}月{dt.day}日{dt.hour}時"
 
 
-def format_forecast_date(forecast_date: str):
+def format_forecast_date(forecast_date: str) -> str:
     """予報日を「xxxx年xx月xx日（x）」に変換する"""
 
     dt = datetime.fromisoformat(forecast_date)
@@ -19,7 +19,7 @@ def format_forecast_date(forecast_date: str):
 
     return f"{dt.year}年{dt.month}月{dt.day}日（{weekday}）"
 
-def format_pop_datetime(forecast_date: str):
+def format_pop_datetime(forecast_date: str) -> str:
     """降水確率の日時を「xx月xx日xx時～xx時」に変換する"""
 
     start = datetime.fromisoformat(forecast_date)
@@ -32,7 +32,7 @@ def format_pop_datetime(forecast_date: str):
     )
 
 
-def format_weather_section(weather_info):
+def format_weather_section(weather_info) -> str:
     pop_text = ""
 
     for rain in weather_info.rain_forecasts:

@@ -17,7 +17,7 @@ def fetch_forecast_json():
     return weather_json_data
 
 
-def extract_weather_info(weather_json_data):
+def extract_weather_info(weather_json_data)-> WeatherInfo:
     """気象予報JSONから必要な情報だけ辞書として返す"""
 
     forecast_series = weather_json_data[0]["timeSeries"][0]
@@ -40,7 +40,7 @@ def extract_weather_info(weather_json_data):
 
     forecast_pop_times = pop_series["timeDefines"]
     forecast_pops = forecast_pop_area["pops"]
-    rain_forecasts = []
+    rain_forecasts: list[RainForecast] = []
 
     for forecast_time, pop in zip(forecast_pop_times, forecast_pops):
         rain_forecasts.append(
@@ -59,21 +59,21 @@ def extract_weather_info(weather_json_data):
     )
 
     temperature = TemperatureInfo(
-    minimum_temperature=temperature_area["temps"][-2],
-    maximum_temperature=temperature_area["temps"][-1],
+        minimum_temperature=temperature_area["temps"][-2],
+        maximum_temperature=temperature_area["temps"][-1],
     )
 
     weather_info = WeatherInfo(
-    report_datetime=weather_json_data[0]["reportDatetime"],
-    forecast_date=forecast_series["timeDefines"][1],
-    weather=forecast_area["weathers"][1],
-    rain_forecasts=tuple(rain_forecasts),
-    temperature=temperature,
+        report_datetime=weather_json_data[0]["reportDatetime"],
+        forecast_date=forecast_series["timeDefines"][1],
+        weather=forecast_area["weathers"][1],
+        rain_forecasts=tuple(rain_forecasts),
+        temperature=temperature,
     )
 
     return weather_info
 
-def find_area(areas, area_name, data_name):
+def find_area(areas, area_name: str, data_name: str):
     """指定された地域のデータを取得する"""
 
     for area in areas:

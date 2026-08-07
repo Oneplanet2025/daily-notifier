@@ -4,7 +4,7 @@ from email.message import EmailMessage
 from src.config import MAIL_ADDRESS, MAIL_PASSWORD, MAIL_TO
 
 
-def send_mail(subject: str, body: str):
+def send_mail(subject: str, body: str) -> None:
     """メールを送信する"""
 
     message = EmailMessage()
