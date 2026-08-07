@@ -1,6 +1,6 @@
 import requests
 from src.config import JMA_FORECAST_URL, JMA_FORECAST_AREA_NAME,JMA_TEMPERATURE_AREA_NAME
-from src.providers.weather_models import (
+from src.providers.weather_json_models import (
     RainForecast,
     TemperatureInfo,
     WeatherInfo,
