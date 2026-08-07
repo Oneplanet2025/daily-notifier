@@ -20,21 +20,25 @@ def fetch_forecast_json():
 def extract_weather_info(weather_json_data):
     """気象予報JSONから必要な情報だけ辞書として返す"""
 
+    forecast_series = weather_json_data[0]["timeSeries"][0]
+    pop_series = weather_json_data[0]["timeSeries"][1]
+    temperature_series = weather_json_data[0]["timeSeries"][2]
+
     # 東部の天気予報を取得
     forecast_area = find_area(
-    weather_json_data[0]["timeSeries"][0]["areas"],
-    JMA_FORECAST_AREA_NAME,
-    "天気予報",
-)
+        forecast_series["areas"],
+        JMA_FORECAST_AREA_NAME,
+        "天気予報",
+    )
 
     # 東部の降水確率を取得
     forecast_pop_area = find_area(
-    weather_json_data[0]["timeSeries"][1]["areas"],
-    JMA_FORECAST_AREA_NAME,
-    "降水確率",
+        pop_series["areas"],
+        JMA_FORECAST_AREA_NAME,
+        "降水確率",
     )
 
-    forecast_pop_times = weather_json_data[0]["timeSeries"][1]["timeDefines"]
+    forecast_pop_times = pop_series["timeDefines"]
     forecast_pops = forecast_pop_area["pops"]
     rain_forecasts = []
 
@@ -49,9 +53,9 @@ def extract_weather_info(weather_json_data):
 
     # 名古屋の気温を取得
     temperature_area = find_area(
-    weather_json_data[0]["timeSeries"][2]["areas"],
-    JMA_TEMPERATURE_AREA_NAME,
-    "気温情報",
+        temperature_series["areas"],
+        JMA_TEMPERATURE_AREA_NAME,
+        "気温情報",
     )
 
     temperature = TemperatureInfo(
@@ -61,7 +65,7 @@ def extract_weather_info(weather_json_data):
 
     weather_info = WeatherInfo(
     report_datetime=weather_json_data[0]["reportDatetime"],
-    forecast_date=weather_json_data[0]["timeSeries"][0]["timeDefines"][1],
+    forecast_date=forecast_series["timeDefines"][1],
     weather=forecast_area["weathers"][1],
     rain_forecasts=tuple(rain_forecasts),
     temperature=temperature,
