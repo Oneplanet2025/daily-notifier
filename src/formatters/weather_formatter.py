@@ -35,20 +35,20 @@ def format_pop_datetime(forecast_date: str):
 def format_weather_section(weather_info):
     pop_text = ""
 
-    for rain in weather_info["rain_forecasts"]:
+    for rain in weather_info.rain_forecasts:
         pop_text += (
-            f'{format_pop_datetime(rain["time"])}：'
-            f'{rain["pop"]}%\n'
+            f'{format_pop_datetime(rain.time)}：'
+            f'{rain.probability}%\n'
         )
     return f"""明日の天気予報
 
-明日の日付：{format_forecast_date(weather_info["forecast_date"])}
-天気：{weather_info["weather_string"]}
+明日の日付：{format_forecast_date(weather_info.forecast_date)}
+天気：{weather_info.weather}
 
 降水確率：
 {pop_text}
 
-最高気温：{weather_info["temp_max"]}℃
-最低気温：{weather_info["temp_min"]}℃
+最高気温：{weather_info.temperature.maximum_temperature}℃
+最低気温：{weather_info.temperature.minimum_temperature}℃
 
-予報取得時間：{format_report_datetime(weather_info["report_datetime"])}"""
+予報取得時間：{format_report_datetime(weather_info.report_datetime)}"""

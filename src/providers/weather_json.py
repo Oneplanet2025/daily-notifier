@@ -1,5 +1,10 @@
 import requests
 from src.config import JMA_FORECAST_URL, JMA_FORECAST_AREA_NAME,JMA_TEMPERATURE_AREA_NAME
+from src.providers.weather_models import (
+    RainForecast,
+    TemperatureInfo,
+    WeatherInfo,
+)
 
 def fetch_forecast_json():
     """気象庁から気象予報JSONを取得する"""
@@ -34,11 +39,14 @@ def extract_weather_info(weather_json_data):
     forecast_pop_times = weather_json_data[0]["timeSeries"][1]["timeDefines"]
     forecast_pops = forecast_pop_area["pops"]
     rain_forecasts = []
+
     for forecast_time, pop in zip(forecast_pop_times, forecast_pops):
-        rain_forecasts.append({
-            "time": forecast_time,
-            "pop": pop,
-    })
+        rain_forecasts.append(
+            RainForecast(
+                time=forecast_time,
+                probability=pop,
+            )
+        )
 
 
     # 名古屋の気温を取得
@@ -50,14 +58,18 @@ def extract_weather_info(weather_json_data):
     if temperature_area is None:
         raise ValueError(f"{JMA_TEMPERATURE_AREA_NAME} の気温情報が見つかりません。")
 
-    weather_info = {
-        "report_datetime": weather_json_data[0]["reportDatetime"],
-        "forecast_date": weather_json_data[0]["timeSeries"][0]["timeDefines"][1],
-        "weather_string":  forecast_area["weathers"][1],
-        "rain_forecasts": rain_forecasts,
-        "temp_min": temperature_area["temps"][-2],
-        "temp_max": temperature_area["temps"][-1],
-    }
+    temperature = TemperatureInfo(
+    minimum_temperature=temperature_area["temps"][-2],
+    maximum_temperature=temperature_area["temps"][-1],
+)
+
+    weather_info = WeatherInfo(
+    report_datetime=weather_json_data[0]["reportDatetime"],
+    forecast_date=weather_json_data[0]["timeSeries"][0]["timeDefines"][1],
+    weather=forecast_area["weathers"][1],
+    rain_forecasts=tuple(rain_forecasts),
+    temperature=temperature,
+)
 
     return weather_info
 
