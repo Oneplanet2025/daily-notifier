@@ -1,4 +1,6 @@
 from datetime import datetime, timedelta
+from src.providers.weather_json_models import WeatherInfo
+
 
 WEEKDAYS = ["月", "火", "水", "木", "金", "土", "日"]
 
@@ -32,7 +34,7 @@ def format_pop_datetime(forecast_date: str) -> str:
     )
 
 
-def format_weather_section(weather_info) -> str:
+def format_weather_section(weather_info: WeatherInfo) -> str:
     pop_text = ""
 
     for rain in weather_info.rain_forecasts:
