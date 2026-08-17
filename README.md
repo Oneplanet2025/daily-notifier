@@ -59,6 +59,11 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 * 取得情報を人間に読みやす形式に変換
 *  メール送信
 *  GitHub Secretsによる機密情報管理
+*  dataclass による天気情報の型付きデータ構造
+*  JSON抽出処理の整理
+*  エリア検索の共通化
+*  型注釈
+*  Ruffによるコード整形
 
 ### 未実装
 
@@ -77,7 +82,8 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 | ------- | ------------------ |
 | OS      | Windows 11         |
 | 言語      |  Python 3.14.6     |
-| 利用ライブラリ |  requests  |
+| 利用ライブラリ |  requests, python-dotenv |
+| 開発ツール |  Ruff |
 | エディタ    | Visual Studio Code |
 | バージョン管理 | Git / GitHub       |
 | CI/CD   | GitHub Actions     |
@@ -94,7 +100,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 ```text
 daily-notifier/
 ├── .github/workflows/
-│   └── test.yml
+│   └── daily-notifier.yml
 ├── src/
 │   ├── __init__.py
 │   ├── config.py

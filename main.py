@@ -1,18 +1,16 @@
-from src import weather
-from src import format
+from src.providers import weather_json
+from src.formatters import weather_formatter, message
 from src.mailer import send_mail
 
-def main():
-    weather_json_data = weather.fetch_forecast_json()
 
-    weather_info = weather.get_weather(weather_json_data)
+def main() -> None:
+    forecast_json = weather_json.fetch_forecast_json()
 
-    format.format_weather(weather_info)
+    weather_info = weather_json.extract_weather_info(forecast_json)
 
-    send_mail(
-    "daily-notifier",
-    format.format_weather(weather_info)
-    )
+    weather_section = weather_formatter.format_weather_section(weather_info)
+
+    send_mail("daily-notifier", message.create_message(weather_section))
 
 
 if __name__ == "__main__":
