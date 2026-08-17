@@ -31,17 +31,6 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 
 ---
 
-## 開発方針
-
-本プロジェクトでは、以下の方針で開発を進めています。
-
-* 学習目的を重視する
-* 保守性・可読性を優先する
-* 実務で避けられるアンチパターンは採用しない
-* 設計理由を理解しながら実装を進める
-* AIエージェントを積極的に活用する
-
----
 
 ## 現在の開発状況
 
@@ -104,13 +93,18 @@ daily-notifier/
 ├── src/
 │   ├── __init__.py
 │   ├── config.py
-│   ├── format.py
 │   ├── mailer.py
-│   └── weather.py
+│   ├── formatters/
+    │   ├── message.py
+    │   └── weather_formatter.py
+│   └── providers/
+│       ├── weather_json_models.py
+│       └── weather_json.py
 ├── main.py
 ├── .venv/（Git管理外）
 ├── .vscode/（Git管理外）
 ├── .env.example
+├── pyproject.toml
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -124,15 +118,8 @@ daily-notifier/
 
 ---
 
-## 設計上の決定事項
+## セットアップ方法
 
-### メール通知を採用
-
-通知先としてメールを採用した理由は、天気アプリやSNSを開く機会を減らすためです。
-
-アプリを開くと、広告やショート動画などに注意が向き、情報収集に不必要に多くの時間を使ってしまうことがあります。
-
-必要な情報だけをメールで受け取ることで、情報収集を短時間で終えられる環境を目指しています。
 
 ### Python仮想環境
 
