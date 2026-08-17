@@ -1,10 +1,16 @@
 import requests
-from src.config import JMA_FORECAST_URL, JMA_FORECAST_AREA_NAME,JMA_TEMPERATURE_AREA_NAME
+
+from src.config import (
+    JMA_FORECAST_AREA_NAME,
+    JMA_FORECAST_URL,
+    JMA_TEMPERATURE_AREA_NAME,
+)
 from src.providers.weather_json_models import (
     RainForecast,
     TemperatureInfo,
     WeatherInfo,
 )
+
 
 def fetch_forecast_json():
     """気象庁から気象予報JSONを取得する"""
@@ -17,7 +23,7 @@ def fetch_forecast_json():
     return weather_json_data
 
 
-def extract_weather_info(weather_json_data)-> WeatherInfo:
+def extract_weather_info(weather_json_data) -> WeatherInfo:
     """気象予報JSONから必要な情報だけ辞書として返す"""
 
     forecast_series = weather_json_data[0]["timeSeries"][0]
@@ -50,7 +56,6 @@ def extract_weather_info(weather_json_data)-> WeatherInfo:
             )
         )
 
-
     # 名古屋の気温を取得
     temperature_area = find_area(
         temperature_series["areas"],
@@ -73,6 +78,7 @@ def extract_weather_info(weather_json_data)-> WeatherInfo:
 
     return weather_info
 
+
 def find_area(areas, area_name: str, data_name: str):
     """指定された地域のデータを取得する"""
 
@@ -81,4 +87,3 @@ def find_area(areas, area_name: str, data_name: str):
             return area
 
     raise ValueError(f"{area_name} の{data_name}が見つかりません。")
-
