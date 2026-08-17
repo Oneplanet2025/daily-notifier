@@ -35,8 +35,6 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 ## 現在の開発状況
 
 
-### 実装済み
-
 * プロジェクトの作成
 * Gitリポジトリの作成
 * 開発方針・設計ドキュメントの整備
@@ -54,14 +52,6 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 *  型注釈
 *  Ruffによるコード整形
 
-### 未実装
-
-以下は今後実装予定です。
-
-- 気圧変化
-- ごみ収集日の情報
-- 二十四節気・七十二候
-- AIによる通知文の整形
 
 ---
 
@@ -95,8 +85,8 @@ daily-notifier/
 │   ├── config.py
 │   ├── mailer.py
 │   ├── formatters/
-    │   ├── message.py
-    │   └── weather_formatter.py
+│   │   ├── message.py
+│   │   └── weather_formatter.py
 │   └── providers/
 │       ├── weather_json_models.py
 │       └── weather_json.py
