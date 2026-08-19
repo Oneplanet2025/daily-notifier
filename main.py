@@ -1,11 +1,14 @@
+from logging import getLogger
+
 from src.providers import weather_json
 from src.formatters import weather_formatter, message
 from src.mailer import send_mail
-from logging import getLogger
+
+logger = getLogger(__name__)
 
 
 def main() -> None:
-    logger = getLogger(__name__)
+    
     logger.info("daily-notifierを開始します")
 
     forecast_json = weather_json.fetch_forecast_json()
