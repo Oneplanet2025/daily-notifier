@@ -1,4 +1,9 @@
-from logging import getLogger
+from logging import getLogger, basicConfig, INFO
+
+basicConfig(
+    level=INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
 
 from src.providers import weather_json
 from src.formatters import weather_formatter, message
@@ -8,7 +13,6 @@ logger = getLogger(__name__)
 
 
 def main() -> None:
-    
     logger.info("daily-notifierを開始します")
 
     forecast_json = weather_json.fetch_forecast_json()
