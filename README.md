@@ -42,7 +42,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 * GitHub Actionsの定期実行
 * 気象庁JSONの取得
 * JSONから必要な情報の抽出
-* Pythonモジュール分割（config.py・weather.py・main.py）
+* Pythonモジュール分割
 * 取得情報を人間に読みやす形式に変換
 *  メール送信
 *  GitHub Secretsによる機密情報管理
