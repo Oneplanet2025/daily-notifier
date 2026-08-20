@@ -1,13 +1,14 @@
 from logging import getLogger, basicConfig, INFO
 
+from src.providers import weather_json
+from src.formatters import weather_formatter, message
+from src.mailer import send_mail
+
+
 basicConfig(
     level=INFO,
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
 )
-
-from src.providers import weather_json
-from src.formatters import weather_formatter, message
-from src.mailer import send_mail
 
 logger = getLogger(__name__)
 
