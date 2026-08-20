@@ -1,10 +1,10 @@
 # daily-notifier
 
-GitHub Actionsを利用して、翌日の生活情報を毎晩自動通知するシステムです。
+GitHub Actionsを利用して、翌日の生活情報を毎日夕方に自動通知するシステムです。
 
 現在はMVPが完成しており、GitHub Actionsから毎日自動実行され、気象庁の天気予報をメール通知できる状態です。
 
-今後は通知機能の拡張やコード整理を進める予定です。
+今後はコード整理を進める予定です。
 
 ---
 
@@ -42,7 +42,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 * GitHub Actionsの定期実行
 * 気象庁JSONの取得
 * JSONから必要な情報の抽出
-* Pythonモジュール分割（config.py・weather.py・main.py）
+* Pythonモジュール分割
 * 取得情報を人間に読みやす形式に変換
 *  メール送信
 *  GitHub Secretsによる機密情報管理
@@ -51,6 +51,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 *  エリア検索の共通化
 *  型注釈
 *  Ruffによるコード整形
+*  ログの実装
 
 
 ---
@@ -60,8 +61,8 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 | 項目      | 内容                 |
 | ------- | ------------------ |
 | OS      | Windows 11         |
-| 言語      |  Python 3.14.6     |
-| 利用ライブラリ |  requests, python-dotenv |
+| 言語      |  Python 3.14     |
+| 利用ライブラリ |  requests, python-dotenv|
 | 開発ツール |  Ruff |
 | エディタ    | Visual Studio Code |
 | バージョン管理 | Git / GitHub       |
@@ -73,7 +74,6 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 
 ## ディレクトリ構成
 
-現在は開発初期のため、ディレクトリ構成は変更される可能性があります。
 .env はプロジェクト外で管理しています。
 
 ```text
@@ -149,7 +149,7 @@ pip install -r requirements.txt
 
 現在は名古屋市（気象庁 名古屋地方気象台）の予報を取得するよう設定しています。
 
-他の地域で利用する場合は、`src/config.py`で設定している気象庁の予報JSONのURLを変更してください。
+他の地域で利用する場合は、`src/config.py`で設定している気象庁の予報JSONの「URL」「取得地域」「取得地点」を変更してください。
 
 気象庁の予報区一覧：
 https://www.jma.go.jp/bosai/common/const/area.json
@@ -166,5 +166,6 @@ https://www.jma.go.jp/bosai/common/const/area.json
 
 ローカル開発では プロジェクト外に配置した`.env` を利用し、GitHub Actionsでは Secrets を環境変数として渡しています。
 
-ローカル実行時は、`.env.example` を参考に、プロジェクト外の任意の場所（例：`C:\Secrets\daily-notifier.env`）へ `.env` ファイルを作成してください。その後、config.pyの「ENV_PATH 」に.envファイルのパスを記載してください。
+ローカル実行時は、`.env.example` を参考に、プロジェクト外の任意の場所（例：`C:\Secrets\daily-notifier.env`）へ `.env` ファイルを作成してください。
+その後、config.pyの「ENV_PATH」に.envファイルのパスを記載してください。
 
