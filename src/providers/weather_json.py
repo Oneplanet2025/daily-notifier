@@ -23,16 +23,16 @@ def fetch_forecast_json():
         response = requests.get(JMA_FORECAST_URL, timeout=20)
         response.raise_for_status()
         weather_json_data = response.json()
+    except requests.exceptions.JSONDecodeError:
+        logger.exception("気象予報JSONの解析に失敗しました")
+        raise
+
     except requests.Timeout:
         logger.exception("気象予報JSONの取得がタイムアウトしました")
         raise
 
     except requests.RequestException:
         logger.exception("気象予報JSONのHTTP通信に失敗しました")
-        raise
-
-    except ValueError:
-        logger.exception("気象予報JSONの解析に失敗しました")
         raise
 
     except Exception:
