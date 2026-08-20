@@ -16,8 +16,10 @@ JMA_FORECAST_AREA_NAME = "東部"
 # 気温を取得する地点
 JMA_TEMPERATURE_AREA_NAME = "名古屋"
 
+ENV_PATH = Path(r"C:\Secrets\daily-notifier.env")
+
 if os.getenv("GITHUB_ACTIONS") != "true":
-    load_dotenv(Path(r"C:\Secrets\daily-notifier.env"))
+    load_dotenv(ENV_PATH)
 
 logger.info("環境変数を読み込みます")
 try:
