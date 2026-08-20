@@ -51,6 +51,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 *  エリア検索の共通化
 *  型注釈
 *  Ruffによるコード整形
+*  ログの実装
 
 
 ---
@@ -61,7 +62,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 | ------- | ------------------ |
 | OS      | Windows 11         |
 | 言語      |  Python 3.14.6     |
-| 利用ライブラリ |  requests, python-dotenv |
+| 利用ライブラリ |  requests, python-dotenv|
 | 開発ツール |  Ruff |
 | エディタ    | Visual Studio Code |
 | バージョン管理 | Git / GitHub       |
