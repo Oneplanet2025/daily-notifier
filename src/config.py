@@ -1,7 +1,9 @@
 import os
 from logging import getLogger
 from pathlib import Path
+
 from dotenv import load_dotenv
+
 
 logger = getLogger(__name__)
 
@@ -26,4 +28,3 @@ try:
 except KeyError:
     logger.exception("環境変数の読み込みに失敗しました")
     raise
-
