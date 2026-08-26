@@ -2,20 +2,20 @@ from logging import getLogger
 import smtplib
 from email.message import EmailMessage
 
-from src.config import MAIL_ADDRESS, MAIL_PASSWORD, MAIL_TO
+from src.config import Settings
 
 
 logger = getLogger(__name__)
 
 
-def send_mail(subject: str, body: str) -> None:
+def send_mail(subject: str, body: str, settings: Settings) -> None:
     """メールを送信する"""
 
     message = EmailMessage()
 
     message["Subject"] = subject
-    message["From"] = MAIL_ADDRESS
-    message["To"] = MAIL_TO
+    message["From"] = settings.mail_address
+    message["To"] = settings.mail_to
 
     message.set_content(body)
 
@@ -23,7 +23,7 @@ def send_mail(subject: str, body: str) -> None:
         logger.info("メールサービスにログインします")
 
         try:
-            smtp.login(MAIL_ADDRESS, MAIL_PASSWORD)
+            smtp.login(settings.mail_address, settings.mail_password)
             logger.info("メールサービスにログインしました")
         except Exception:
             logger.exception("メールサービスへのログインに失敗しました")
