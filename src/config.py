@@ -23,6 +23,7 @@ ENV_PATH = Path(r"C:\Secrets\daily-notifier.env")
 if os.getenv("GITHUB_ACTIONS") != "true":
     load_dotenv(ENV_PATH)
 
+
 @dataclass(frozen=True)
 class Settings:
     mail_address: str
