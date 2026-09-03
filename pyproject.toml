@@ -1,2 +1,6 @@
 [tool.ruff.lint]
 select = ["E", "F"]
+
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
