@@ -97,6 +97,10 @@ def extract_weather_info(weather_json_data) -> WeatherInfo:
             rain_forecasts=tuple(rain_forecasts),
             temperature=temperature,
         )
+    except KeyError:
+        logger.exception("天気情報の解析中にKeyErrorが発生しました")
+        raise
+
     except IndexError:
         logger.exception("天気情報の解析中にIndexErrorが発生しました")
         raise

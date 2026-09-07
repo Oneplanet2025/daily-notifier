@@ -4,7 +4,7 @@ GitHub Actionsを利用して、翌日の生活情報を毎日夕方に自動通
 
 現在はMVPが完成しており、GitHub Actionsから毎日自動実行され、気象庁の天気予報をメール通知できる状態です。
 
-今後はコード整理を進める予定です。
+今後はCI実装を進める予定です。
 
 ---
 
@@ -55,6 +55,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 *  Settings によるメール関連環境変数の管理
 *  環境変数の存在・空文字チェック
 *  Local / GitHub Actionsの環境差を吸収
+*  pytestの実装
 
 
 ---
@@ -65,7 +66,7 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 | ------- | ------------------ |
 | OS      | Windows 11         |
 | 言語      |  Python 3.14     |
-| 利用ライブラリ |  requests, python-dotenv|
+| 利用ライブラリ |  requests, python-dotenv, pytest|
 | 開発ツール |  Ruff |
 | エディタ    | Visual Studio Code |
 | バージョン管理 | Git / GitHub       |
@@ -93,6 +94,11 @@ daily-notifier/
 │   └── providers/
 │       ├── weather_json_models.py
 │       └── weather_json.py
+├── tests/
+│   ├── test_config.py
+│   ├── test_mailer.py
+│   ├── test_weather_formatter.py
+│   └── test_weather_json.py
 ├── main.py
 ├── .venv/（Git管理外）
 ├── .vscode/（Git管理外）
@@ -171,4 +177,21 @@ https://www.jma.go.jp/bosai/common/const/area.json
 
 ローカル実行時は、`.env.example` を参考に、プロジェクト外の任意の場所（例：`C:\Secrets\daily-notifier.env`）へ `.env` ファイルを作成してください。
 その後、config.pyの「ENV_PATH」に.envファイルのパスを記載してください。
+
+### テストの実行
+
+プロジェクトのルートディレクトリで以下のコマンドを実行すると、テストを実行できます。
+
+```bash
+pytest
+```
+
+テストカバレッジを確認する場合は、以下を実行します。
+
+```bash
+pytest --cov=src
+```
+
+`pytest --cov=src` では、`src` 配下のソースコードについて、テストによる実行状況を確認できます。
+
 
