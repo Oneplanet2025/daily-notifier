@@ -3,9 +3,7 @@ import requests
 from unittest.mock import Mock, patch
 
 from src.config import (
-    JMA_FORECAST_AREA_NAME,
     JMA_FORECAST_URL,
-    JMA_TEMPERATURE_AREA_NAME,
 )
 from src.providers.weather_json import (
     fetch_forecast_json,
@@ -49,6 +47,7 @@ def test_fetch_forecast_json_json_decode_error():
         with pytest.raises(requests.exceptions.JSONDecodeError):
             fetch_forecast_json()
 
+
 def test_fetch_forecast_json_timeout():
     with patch(
         "src.providers.weather_json.requests.get",
@@ -56,6 +55,7 @@ def test_fetch_forecast_json_timeout():
     ):
         with pytest.raises(requests.Timeout):
             fetch_forecast_json()
+
 
 def test_fetch_forecast_json_request_exception():
     with patch(
@@ -65,6 +65,7 @@ def test_fetch_forecast_json_request_exception():
         with pytest.raises(requests.RequestException):
             fetch_forecast_json()
 
+
 def test_fetch_forecast_json_other_exception():
     with patch(
         "src.providers.weather_json.requests.get",
@@ -72,7 +73,6 @@ def test_fetch_forecast_json_other_exception():
     ):
         with pytest.raises(Exception):
             fetch_forecast_json()
-
 
 
 def test_extract_weather_info():
@@ -133,6 +133,7 @@ def test_extract_weather_info():
     assert result.temperature.minimum_temperature == "22"
     assert result.temperature.maximum_temperature == "30"
 
+
 def test_extract_weather_info_key_error():
     weather_json_data = [
         {
@@ -143,6 +144,7 @@ def test_extract_weather_info_key_error():
 
     with pytest.raises(KeyError):
         extract_weather_info(weather_json_data)
+
 
 def test_extract_weather_info_index_error():
     weather_json_data = [
@@ -157,6 +159,7 @@ def test_extract_weather_info_index_error():
 
     with pytest.raises(IndexError):
         extract_weather_info(weather_json_data)
+
 
 def test_extract_weather_info_other_exception():
     weather_json_data = [
@@ -207,8 +210,6 @@ def test_extract_weather_info_other_exception():
     ):
         with pytest.raises(RuntimeError, match="unexpected error"):
             extract_weather_info(weather_json_data)
-
-
 
 
 def test_find_area():

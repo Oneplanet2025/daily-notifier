@@ -17,13 +17,16 @@ def test_format_report_datetime():
     result = format_report_datetime("2026-09-03T15:30:00+09:00")
     assert result == "2026年9月3日15時"
 
+
 def test_format_report_datetime_invalid():
     with pytest.raises(ValueError):
         format_report_datetime("invalid-date")
 
+
 def test_format_report_datetime_empty_string():
     with pytest.raises(ValueError):
         format_report_datetime("")
+
 
 def test_format_report_datetime_none():
     with pytest.raises(TypeError):
@@ -34,13 +37,16 @@ def test_format_forecast_date():
     result = format_forecast_date("2026-09-04T00:00:00+09:00")
     assert result == "2026年9月4日（金）"
 
+
 def test_format_forecast_date_invalid():
     with pytest.raises(ValueError):
         format_forecast_date("invalid-date")
 
+
 def test_format_forecast_date_empty_string():
     with pytest.raises(ValueError):
         format_forecast_date("")
+
 
 def test_format_forecast_date_none():
     with pytest.raises(TypeError):
@@ -51,18 +57,22 @@ def test_format_pop_datetime():
     result = format_pop_datetime("2026-09-04T00:00:00+09:00")
     assert result == "9月4日00時～06時"
 
+
 def test_format_pop_datetime_evening():
     result = format_pop_datetime("2026-09-04T18:00:00+09:00")
 
     assert result == "9月4日18時～00時"
 
+
 def test_format_pop_datetime_invalid():
     with pytest.raises(ValueError):
         format_pop_datetime("invalid-date")
 
+
 def test_format_pop_datetime_empty_string():
     with pytest.raises(ValueError):
         format_pop_datetime("")
+
 
 def test_format_pop_datetime_none():
     with pytest.raises(TypeError):

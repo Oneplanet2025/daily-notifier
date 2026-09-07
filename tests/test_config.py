@@ -14,6 +14,7 @@ def test_settings_from_environment(monkeypatch):
     assert result.mail_password == "password"
     assert result.mail_to == "to@example.com"
 
+
 def test_settings_from_environment_missing_mail_address(monkeypatch):
     monkeypatch.delenv("MAIL_ADDRESS", raising=False)
     monkeypatch.delenv("MAIL_PASSWORD", raising=False)
@@ -21,6 +22,7 @@ def test_settings_from_environment_missing_mail_address(monkeypatch):
 
     with pytest.raises(KeyError):
         Settings.from_environment()
+
 
 def test_settings_from_environment_empty_value(monkeypatch):
     monkeypatch.setenv("MAIL_ADDRESS", "")
