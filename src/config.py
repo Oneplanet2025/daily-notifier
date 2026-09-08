@@ -54,5 +54,3 @@ class Settings:
             mail_to=mail_to,
         )
 
-
-settings = Settings.from_environment()
