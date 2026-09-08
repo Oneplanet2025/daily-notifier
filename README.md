@@ -4,7 +4,7 @@ GitHub Actionsを利用して、翌日の生活情報を毎日夕方に自動通
 
 現在はMVPが完成しており、GitHub Actionsから毎日自動実行され、気象庁の天気予報をメール通知できる状態です。
 
-今後はCI実装を進める予定です。
+今後は、追加機能の実装を進める予定です。
 
 ---
 
@@ -56,6 +56,8 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 *  環境変数の存在・空文字チェック
 *  Local / GitHub Actionsの環境差を吸収
 *  pytestの実装
+*  CIの導入（pytest、Ruffによるコードチェックとフォーマットチェック）
+*  GitHubのブランチ保護にRequired Status Checkを設定
 
 
 ---
@@ -83,7 +85,8 @@ daily-notifierは、翌日の天気や降水確率などの生活情報をまと
 ```text
 daily-notifier/
 ├── .github/workflows/
-│   └── daily-notifier.yml
+│   ├── daily-notifier.yml  # 本番用：定期実行・メール通知
+│   └── ci.yml              # CI用：Pull Request時のテスト・コード検証
 ├── src/
 │   ├── __init__.py
 │   ├── config.py
