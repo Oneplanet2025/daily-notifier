@@ -1,3 +1,7 @@
+#Ruffエラーを起こすためのimport CIの確認のため
+import os
+
+
 import pytest
 
 from src.config import Settings
