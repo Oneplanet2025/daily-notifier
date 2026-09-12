@@ -9,13 +9,13 @@ from dotenv import load_dotenv
 logger = getLogger(__name__)
 
 # 気象庁の予報JSON URL
-JMA_FORECAST_URL = "http://www.jma.go.jp/bosai/forecast/data/forecast/230000.json"
+JMA_FORECAST_URL = "http://www.jma.go.jp/bosai/forecast/data/forecast/280000.json"
 
 # 天気予報を取得する地域
-JMA_FORECAST_AREA_NAME = "東部"
+JMA_FORECAST_AREA_NAME = "阪神"
 
 # 気温を取得する地点
-JMA_TEMPERATURE_AREA_NAME = "名古屋"
+JMA_TEMPERATURE_AREA_NAME = "西宮"
 
 # 機密情報ファイルのローカル上のパス
 ENV_PATH = Path(r"C:\Secrets\daily-notifier.env")
