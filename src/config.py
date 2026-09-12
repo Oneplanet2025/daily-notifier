@@ -12,10 +12,10 @@ logger = getLogger(__name__)
 JMA_FORECAST_URL = "http://www.jma.go.jp/bosai/forecast/data/forecast/280000.json"
 
 # 天気予報を取得する地域
-JMA_FORECAST_AREA_NAME = "阪神"
+JMA_FORECAST_AREA_NAME = "南部"
 
 # 気温を取得する地点
-JMA_TEMPERATURE_AREA_NAME = "西宮"
+JMA_TEMPERATURE_AREA_NAME = "神戸"
 
 # 機密情報ファイルのローカル上のパス
 ENV_PATH = Path(r"C:\Secrets\daily-notifier.env")
