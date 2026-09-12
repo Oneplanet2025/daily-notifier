@@ -37,9 +37,9 @@ def format_weather_section(weather_info: WeatherInfo) -> str:
 
     for rain in weather_info.rain_forecasts:
         pop_text += f"{format_pop_datetime(rain.time)}：{rain.probability}%\n"
-    return f"""明日の天気予報
+    return f"""阪神の明日の天気予報
 
-神戸の明日の日付：{format_forecast_date(weather_info.forecast_date)}
+明日の日付：{format_forecast_date(weather_info.forecast_date)}
 天気：{weather_info.weather}
 
 降水確率：
